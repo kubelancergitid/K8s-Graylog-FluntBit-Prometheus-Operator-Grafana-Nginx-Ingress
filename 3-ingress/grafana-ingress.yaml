@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana-ingress-tls
+  namespace: ingress-nginx
+  annotations:
+    fluentbit.io/parser: "k8s-nginx-ingress"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: letsencrypt-prod
+spec:
+  tls:
+  - secretName: grafana-ingress-tls
+    hosts:
+    - grafana.kubelancer.net
+  rules:
+  - host: grafana.kubelancer.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000

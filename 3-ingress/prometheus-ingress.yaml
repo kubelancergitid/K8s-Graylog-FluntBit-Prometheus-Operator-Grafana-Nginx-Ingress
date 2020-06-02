@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus-ingress-tls
+  namespace: ingress-nginx
+  annotations:
+    enable-vts-status: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10254"
+    ingress.kubernetes.io/rewrite-target: "/"
+    fluentbit.io/parser: "k8s-nginx-ingress"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: letsencrypt-prod
+spec:
+  tls:
+  - secretName: prometheus-ingress-tls
+    hosts:
+    - prometheus.kubelancer.net
+  rules:
+  - host: prometheus.kubelancer.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: prometheus-server
+          servicePort: 9090
