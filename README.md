@@ -65,7 +65,7 @@ sh 2-install-cert-manager.sh
 ```
 #### 4. Create Issuer on namespace logging and ingress-nginx
 
-``bash
+```bash
 
 sh 3-install-issuer.sh
 
@@ -154,7 +154,7 @@ Demo: 2
 4. Then Select the Gelf TCP  and click on  Launch New Input button.
 5. From the box Select Global and Click Ok.
 6. Start the INPUT
-7. We have deployed sample Nginx Web server already, access it bu curl/Via Browser to forward message
+7. We have deployed sample Nginx Web server already, access it by running curl/Via Browser to forward message
 
 ```bash
 
